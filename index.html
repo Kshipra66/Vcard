@@ -21,48 +21,44 @@
       position: relative;
     }
 
-    .hammer {
-      font-size: 3rem;
-      cursor: pointer;
-      margin-bottom: 10px;
-      animation: wiggle 1.2s infinite;
-    }
-
-    @keyframes wiggle {
-      0% { transform: rotate(0deg); }
-      25% { transform: rotate(-10deg); }
-      50% { transform: rotate(10deg); }
-      75% { transform: rotate(-5deg); }
-      100% { transform: rotate(0deg); }
-    }
-
+    /* BIG HEART */
     .heart {
-      width: 200px;
-      height: 180px;
+      width: 280px;
+      height: 250px;
       background: #e63946;
       position: relative;
       transform: rotate(-45deg);
-      margin: 30px auto;
+      margin: 40px auto;
       cursor: pointer;
-      transition: transform 0.4s ease, opacity 0.4s ease;
+      animation: heartbeat 1.2s infinite;
+      transition: transform 0.5s ease, opacity 0.5s ease;
     }
 
     .heart::before,
     .heart::after {
       content: "";
-      width: 200px;
-      height: 180px;
+      width: 280px;
+      height: 250px;
       background: #e63946;
       border-radius: 50%;
       position: absolute;
     }
 
-    .heart::before { top: -100px; left: 0; }
-    .heart::after { left: 100px; top: 0; }
+    .heart::before { top: -140px; left: 0; }
+    .heart::after { left: 140px; top: 0; }
 
+    @keyframes heartbeat {
+      0% { transform: rotate(-45deg) scale(1); }
+      25% { transform: rotate(-45deg) scale(1.05); }
+      50% { transform: rotate(-45deg) scale(1); }
+      75% { transform: rotate(-45deg) scale(1.1); }
+      100% { transform: rotate(-45deg) scale(1); }
+    }
+
+    /* EXPLODE */
     .broken {
       opacity: 0;
-      transform: scale(0.3) rotate(-45deg);
+      transform: scale(2) rotate(-45deg);
     }
 
     .inside {
@@ -76,8 +72,8 @@
     }
 
     button {
-      padding: 12px 20px;
-      margin: 10px;
+      padding: 12px 22px;
+      margin: 12px;
       font-size: 1rem;
       border: none;
       border-radius: 25px;
@@ -96,11 +92,13 @@
       transition: transform 0.3s ease;
     }
 
-    .sad-cat img { width: 140px; }
+    .sad-cat img {
+      width: 160px;
+    }
 
     .floating-heart {
       position: absolute;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       animation: floatUp linear forwards;
     }
 
@@ -143,35 +141,26 @@
 </head>
 <body>
 
-  <!-- heart break sound -->
   <audio id="crackSound" src="https://www.soundjay.com/mechanical/sounds/wood-crack-1.mp3"></audio>
-
-  <!-- Dharma-style romantic music (replace with your preferred mp3 if you want) -->
   <audio id="dharmamusic" src="https://cdn.pixabay.com/audio/2023/03/28/audio_9a9a3d6e0b.mp3" loop></audio>
 
   <div class="container">
-    <div class="hammer" onclick="breakHeart()">🔨</div>
     <div class="heart" id="heart" onclick="breakHeart()"></div>
 
     <div class="inside" id="inside">
       <h2>Will you be my Valentine? 💘</h2>
-      <button class="yes" onclick="yesClick()">Yes 💖</button>
-      <button class="no" id="noBtn" onclick="noClick()">No 🙃</button>
+      <button class="YES!!" onclick="yesClick()">Yes 💖</button>
+      <button class="NO :(" id="noBtn" onclick="noClick()">No 🙃</button>
 
       <div class="sad-cat" id="sadCat">
         <img id="catImg" src="sad_cat.jpeg" alt="Sad Cat" />
-        <p id="catText">Please!!!</p>
+        <p id="catText">The cat is sad.</p>
       </div>
     </div>
   </div>
 
   <script>
     let noCount = 0;
-    const sadCats = [
-      "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fstock.adobe.com%2Fsearch%3Fk%3Dsad%2Bkitty&ved=0CBYQjRxqFwoTCMChpY6UvZIDFQAAAAAdAAAAABAI&opi=89978449",
-      "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fstock.adobe.com%2Fsearch%3Fk%3Dsad%2Bkitty&ved=0CBYQjRxqFwoTCMChpY6UvZIDFQAAAAAdAAAAABAI&opi=89978449",
-      "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fstock.adobe.com%2Fsearch%3Fk%3Dsad%2Bkitty&ved=0CBYQjRxqFwoTCMChpY6UvZIDFQAAAAAdAAAAABAI&opi=89978449"
-    ];
 
     function breakHeart() {
       document.getElementById('crackSound').play();
@@ -185,7 +174,7 @@
       document.body.innerHTML = `
         <div style="text-align:center;padding-top:15vh;">
           <h1 style="font-size:3rem;color:#e63946;animation:pop 1s ease;">HE SAID YES!!! 💖💖💖</h1>
-          <p style="font-size:1.4rem;">Cue the Dharma music. This is destiny. 💍</p>
+          <p style="font-size:1.4rem;">Dharma music plays. Destiny confirmed. 💍</p>
         </div>
       `;
       document.getElementById('dharmamusic').play();
@@ -197,12 +186,10 @@
     function noClick() {
       noCount++;
       const cat = document.getElementById('sadCat');
-      const img = document.getElementById('catImg');
       const text = document.getElementById('catText');
       const noBtn = document.getElementById('noBtn');
 
       cat.style.display = 'block';
-      img.src = sadCats[Math.min(noCount - 1, sadCats.length - 1)];
       cat.style.transform = `scale(${1 + noCount * 0.25})`;
       text.innerText = noCount > 2 ? 'The cat is emotionally shattered 😿' : 'The cat is sad.';
 
