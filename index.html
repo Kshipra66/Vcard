@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For Meet 💖</title>
+  <title>Meet 💖</title>
   <style>
     body {
       margin: 0;
@@ -19,17 +19,17 @@
     .container {
       text-align: center;
       background: white;
-      padding: 44px 34px;
+      padding: 42px 34px;
       border-radius: 26px;
       box-shadow: 0 30px 60px rgba(230,57,70,0.2);
       width: 90%;
-      max-width: 380px;
+      max-width: 390px;
       position: relative;
-      animation: fadeIn 1.2s ease;
+      animation: fadeIn 0.8s ease;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(25px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -46,55 +46,32 @@
     @keyframes sparkleFloat {
       0% { transform: translateY(0) scale(1); opacity: 0; }
       20% { opacity: 0.9; }
-      50% { transform: translateY(-40px) scale(1.2); }
-      100% { transform: translateY(-80px) scale(0.8); opacity: 0; }
-    }
-
-    .heart {
-      font-size: 5.2rem;
-      animation: heartbeat 1.5s infinite;
-      cursor: pointer;
-      margin-bottom: 6px;
-    }
-
-    @keyframes heartbeat {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.18); }
-      100% { transform: scale(1); }
-    }
-
-    .hint {
-      font-size: 0.85rem;
-      color: #999;
-      margin-bottom: 10px;
-    }
-
-    .inside {
-      display: none;
-      animation: fadeIn 1s ease;
+      50% { transform: translateY(-35px) scale(1.2); }
+      100% { transform: translateY(-70px) scale(0.8); opacity: 0; }
     }
 
     h2 {
-      margin-top: 8px;
       color: #e63946;
       font-weight: 600;
+      margin-bottom: 8px;
     }
 
-    .subtitle {
-      font-size: 0.95rem;
-      color: #666;
-      margin-bottom: 18px;
+    .question {
+      font-size: 1.05rem;
+      color: #444;
+      margin: 22px 0;
+      min-height: 64px;
     }
 
     button {
       width: 100%;
       padding: 14px;
-      margin-top: 14px;
+      margin-top: 12px;
       font-size: 1rem;
       border: none;
       border-radius: 14px;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
     button:hover {
@@ -102,25 +79,24 @@
       box-shadow: 0 8px 18px rgba(0,0,0,0.1);
     }
 
-    .yes {
+    .primary {
       background: linear-gradient(135deg, #e63946, #ff6b6b);
       color: white;
     }
 
-    .no {
+    .secondary {
       background: #f4f4f4;
       color: #666;
     }
 
     .sad-cat {
       display: none;
-      margin-top: 18px;
-      animation: fadeIn 0.6s ease;
+      margin-top: 16px;
+      animation: fadeIn 0.5s ease;
     }
 
     .sad-cat img {
-      width: 120px;
-      opacity: 0.95;
+      width: 110px;
     }
 
     .signature {
@@ -129,9 +105,8 @@
       color: #888;
     }
 
-    .signature span {
+    .signature strong {
       color: #e63946;
-      font-weight: 600;
     }
   </style>
 </head>
@@ -139,63 +114,120 @@
 
   <div class="container" id="card">
     <!-- sparkles -->
-    <div class="sparkle" style="top:20px;left:30px;"></div>
-    <div class="sparkle" style="top:60px;right:40px;animation-delay:1s"></div>
-    <div class="sparkle" style="bottom:40px;left:60px;animation-delay:2s"></div>
-    <div class="sparkle" style="bottom:80px;right:70px;animation-delay:3s"></div>
+    <div class="sparkle" style="top:18px;left:26px;"></div>
+    <div class="sparkle" style="top:64px;right:38px;animation-delay:1s"></div>
+    <div class="sparkle" style="bottom:42px;left:62px;animation-delay:2s"></div>
+    <div class="sparkle" style="bottom:82px;right:74px;animation-delay:3s"></div>
 
-    <div class="heart" id="heart">❤️</div>
-    <div class="hint">tap the heart</div>
+    <h2>Meet 😌</h2>
+    <div class="question" id="question"></div>
 
-    <div class="inside" id="inside">
-      <h2>Meet</h2>
-      <div class="subtitle">I have a small question for you…</div>
-      <h2>Will you be my Valentine? 💘</h2>
+    <button class="primary" id="btn1" onclick="next(true)"></button>
+    <button class="secondary" id="btn2" onclick="next(false)"></button>
 
-      <button class="yes" onclick="yesClick()">Yes 💖</button>
-      <button class="no" onclick="noClick()">No</button>
-
-      <div class="sad-cat" id="sadCat">
-        <img src="sad_cat.jpeg" alt="Sad Cat" />
-        <p id="catText">the cat is sad</p>
-      </div>
-
-      <div class="signature">— from <span>Kshipra</span></div>
+    <div class="sad-cat" id="sadCat">
+      <img src="sad_cat.jpeg" alt="Sad Cat" />
+      <p id="catText">judging you silently</p>
     </div>
+
+    <div class="signature">— from <strong>Kshipra</strong></div>
   </div>
 
   <script>
+    const steps = [
+      {
+        q: "On a scale of 1–10, how stunning am I right now?",
+        a1: "11, obviously",
+        a2: "I am blinded by beauty"
+      },
+      {
+        q: "We’ve been together almost 8 years. How would you rate the experience so far?",
+        a1: "10/10, would choose again",
+        a2: "No complaints, somehow thriving"
+      },
+      {
+        q: "Do you fully support my lifestyle of shopping, Pilates, spas, and treating myself like a priority?",
+        a1: "Obviously. As you should.",
+        a2: "I support it… emotionally"
+      },
+      {
+        q: "When we eat together, what always happens?",
+        a1: "We agree on everything, especially ordering two desserts",
+        a2: "We pretend one dessert is enough and then order another"
+      },
+      {
+        q: "If we compete at literally anything other than food, who usually wins?",
+        a1: "You (correct answer)",
+        a2: "Me (wrong but confident)"
+      },
+      {
+        q: "Be honest. After 8 years, what scares you the most?",
+        a1: "My confidence",
+        a2: "How competitive I am about everything else"
+      },
+      {
+        q: "If someone else described me, they would say:",
+        a1: "She’s unstoppable.",
+        a2: "She’s a lot… but worth it."
+      },
+      {
+        q: "After all these years, what are you MOST used to?",
+        a1: "My overthinking",
+        a2: "My talent for turning nothing into a discussion"
+      },
+      {
+        q: "After almost 8 years, are you still choosing me — knowing exactly who I am?",
+        a1: "Every single day",
+        a2: "I didn’t even hesitate"
+      },
+      {
+        q: "Okay. Pause. This next question is important.",
+        a1: "I’m emotionally prepared",
+        a2: "Why do I feel nervous"
+      },
+      {
+        q: "Meet… after almost 8 years — would you still choose me, and be my Valentine this year? 💘",
+        a1: "Always.",
+        a2: "There was never another option."
+      }
+    ];
+
+    let step = 0;
     let noCount = 0;
-    const heart = document.getElementById('heart');
 
-    heart.addEventListener('click', reveal);
-    heart.addEventListener('touchstart', e => { e.preventDefault(); reveal(); }, { passive: false });
+    const questionEl = document.getElementById('question');
+    const btn1 = document.getElementById('btn1');
+    const btn2 = document.getElementById('btn2');
+    const cat = document.getElementById('sadCat');
+    const catText = document.getElementById('catText');
 
-    function reveal() {
-      document.getElementById('inside').style.display = 'block';
-      heart.style.display = 'none';
-      document.querySelector('.hint').style.display = 'none';
+    function render() {
+      questionEl.innerText = steps[step].q;
+      btn1.innerText = steps[step].a1;
+      btn2.innerText = steps[step].a2;
     }
 
-    function noClick() {
-      noCount++;
-      const cat = document.getElementById('sadCat');
-      const text = document.getElementById('catText');
+    function next(isYes) {
+      if (!isYes) {
+        noCount++;
+        cat.style.display = 'block';
+        catText.innerText = noCount > 2 ? 'I am disappointed but not surprised 😿' : 'judging you silently 😾';
+      }
 
-      cat.style.display = 'block';
-
-      if (noCount === 1) text.innerText = 'the cat is sad 😿';
-      if (noCount === 2) text.innerText = 'the cat is very sad 😿';
-      if (noCount >= 3) text.innerText = 'okay… now you’re just being mean 😿';
+      if (step < steps.length - 1) {
+        step++;
+        render();
+      } else {
+        document.getElementById('card').innerHTML = `
+          <h2>You passed 😌💖</h2>
+          <p style="margin-top:12px">Eight years in, and still choosing us.</p>
+          <p>Same chaos. Same desserts. Same love.</p>
+          <div class="signature" style="margin-top:26px">— always yours, <strong>Kshipra</strong></div>
+        `;
+      }
     }
 
-    function yesClick() {
-      document.getElementById('card').innerHTML = `
-        <h2 style="color:#e63946">You just made my heart very happy 💖</h2>
-        <p style="margin-top:12px">Can’t wait to celebrate together.</p>
-        <div class="signature" style="margin-top:30px">— always yours, <span>Kshipra</span></div>
-      `;
-    }
+    render();
   </script>
 
 </body>
