@@ -149,8 +149,8 @@
 
     <div class="inside" id="inside">
       <h2>Will you be my Valentine? 💘</h2>
-      <button class="YES!!" onclick="yesClick()">Yes 💖</button>
-      <button class="NO :(" id="noBtn" onclick="noClick()">No 🙃</button>
+      <button class="yes" onclick="yesClick()">Yes 💖</button>
+      <button class="no" id="noBtn" onclick="noClick()">No 🙃</button>
 
       <div class="sad-cat" id="sadCat">
         <img id="catImg" src="sad_cat.jpeg" alt="Sad Cat" />
@@ -188,9 +188,36 @@
       const cat = document.getElementById('sadCat');
       const text = document.getElementById('catText');
       const noBtn = document.getElementById('noBtn');
+      const yesBtn = document.querySelector('.yes');
 
       cat.style.display = 'block';
       cat.style.transform = `scale(${1 + noCount * 0.25})`;
+      text.innerText = noCount > 2 ? 'The cat is emotionally shattered 😿' : 'The cat is sad.';
+
+      if (noCount >= 3) {
+        // Make YES button grow dramatically
+        const scale = Math.min(1 + (noCount - 2) * 1.2, 15);
+        yesBtn.style.transform = `scale(${scale})`;
+        yesBtn.style.zIndex = '9999';
+        yesBtn.style.position = 'relative';
+      }
+
+      if (noCount >= 4) {
+        // YES takes over the screen
+        yesBtn.style.position = 'fixed';
+        yesBtn.style.top = '50%';
+        yesBtn.style.left = '50%';
+        yesBtn.style.transform = `translate(-50%, -50%) scale(${scale || 8})`;
+        yesBtn.style.padding = '40px 80px';
+        yesBtn.style.fontSize = '2.5rem';
+      }
+
+      if (noCount >= 3) {
+        noBtn.style.position = 'absolute';
+        noBtn.style.left = Math.random() * 200 - 100 + 'px';
+        noBtn.style.top = Math.random() * 200 - 100 + 'px';
+      }
+    })`;
       text.innerText = noCount > 2 ? 'The cat is emotionally shattered 😿' : 'The cat is sad.';
 
       if (noCount >= 3) {
@@ -239,4 +266,3 @@
 
 </body>
 </html>
-
