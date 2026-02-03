@@ -145,7 +145,7 @@
   <audio id="dharmamusic" src="https://cdn.pixabay.com/audio/2023/03/28/audio_9a9a3d6e0b.mp3" loop></audio>
 
   <div class="container">
-    <div class="heart" id="heart" onclick="breakHeart()"></div>
+    <div class="heart" id="heart"></div>
 
     <div class="inside" id="inside">
       <h2>Will you be my Valentine? 💘</h2>
@@ -160,6 +160,13 @@
   </div>
 
   <script>
+    // Ensure heart works on mobile (touch + click)
+    const heartEl = document.getElementById('heart');
+    heartEl.addEventListener('click', breakHeart);
+    heartEl.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      breakHeart();
+    }, { passive: false });
     let noCount = 0;
 
     function breakHeart() {
@@ -266,3 +273,4 @@
 
 </body>
 </html>
+
